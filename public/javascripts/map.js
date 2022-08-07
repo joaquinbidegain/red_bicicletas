@@ -6,6 +6,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-var marker = L.marker([-34.8741643,-56.2024252]).addTo(map);
-var marker = L.marker([-34.8731824,-56.201401]).addTo(map);
-var marker = L.marker([-34.8630651,-56.2113064]).addTo(map);
+
+$.ajax({
+    dataType: "json",
+    url: "api/bicicletas",
+    success: function(result){
+        console.log(result);
+        result.bicicletas.forEach(function(bici){
+            L.marker(bici.ubicacion, {title: bici.id}).addTo(map);
+        })
+    }
+})
+ 
